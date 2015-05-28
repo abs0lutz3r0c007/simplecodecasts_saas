@@ -26,7 +26,7 @@ class ProfilesController < ApplicationController
   
   def update
     @user = User.find( params[:user_id] )
-    @profile = User.profile
+    @profile = @user.profile
     if @profile.update_attributes(profile_params)
       flash[:success] = "Profile updated!"
       redirect_to user_path( params[:user_id] )
@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
   
   private
     def profile_params
-      params.required(:profile).permit(:first_name, :last_name, :job_title, :phone_number, :contact_email, :description)
+      params.required(:profile).permit(:first_name, :last_name, :avatar, :job_title, :phone_number, :contact_email, :description)
     end
   
     def only_current_user
